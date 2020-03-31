@@ -38,6 +38,7 @@ function App() {
 
   return (
     <div className="app">
+		<title>Search Weather</title>
 		<main>
 			<div className="search-box">
 				<input 
