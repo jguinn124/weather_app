@@ -32,7 +32,7 @@ function App() {
 		let month = months[d.getMonth()];
 		let year = d.getFullYear();
 
-		return `${day} ${date} ${month} ${year}`
+		return `${day} ${month} ${date} ${year}`
 	}
 
 
@@ -61,10 +61,10 @@ function App() {
 				</div>
 				<div className="weather-box">
 					<div className="temp">
-						{Math.round(weather.main.temp)}°
+						{Math.round(weather.main.temp)}°F
 					</div>
 					<div className="weather">
-						{weather.weather[0].main}
+						{weather.weather[0].description}
 					</div>
 				</div>
 			</div>
