@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 const api = {
 	key: "b3beb547b4350f89d8920d06161e4080",
 	base: "https://api.openweathermap.org/data/2.5/"
@@ -38,7 +39,6 @@ function App() {
 
   return (
     <div className="app">
-		<title>Search Weather</title>
 		<main>
 			<div className="search-box">
 				<input 
