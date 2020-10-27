@@ -3,6 +3,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 
+//card
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+
 const api = {
   key: "b3beb547b4350f89d8920d06161e4080",
   base: "https://api.openweathermap.org/data/2.5/",
@@ -46,6 +51,23 @@ const useStyles = makeStyles((theme) => ({
       width: "30ch",
     },
   },
+  root: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  weathercontent: {
+    paddingTop: "50px",
+  },
 }));
 
 function App() {
@@ -60,7 +82,6 @@ function App() {
         .then((result) => {
           setWeather(result);
           setQuery("");
-          console.log(result);
         });
     }
   };
@@ -120,26 +141,38 @@ function App() {
           />
         </Grid>
       </Grid>
-      <div className="app">
-        {typeof weather.main != "undefined" ? (
-          <div>
-            <div>
-              <div className="location-box">
-                <div className="location">
-                  {weather.name}, {weather.sys.country}
+      <Grid container justify="center" className={classes.weathercontent}>
+        <Card className={classes.root}>
+          <CardContent>
+            <Typography
+              className={classes.title}
+              color="textSecondary"
+              gutterBottom
+            >
+              {DateBuilder(new Date())}
+            </Typography>
+            <Typography variant="h5" component="h2">
+              {typeof weather.main != "undefined" ? (
+                <div>
+                  <div className="weather-box">
+                    <div className="temp">
+                      {Math.round(weather.main.temp)}°F
+                    </div>
+                    <div className="weather">
+                      {weather.weather[0].description}
+                    </div>
+                  </div>
                 </div>
-                <div className="date"> {DateBuilder(new Date())} </div>
-              </div>
-            </div>
-            <div className="weather-box">
-              <div className="temp">{Math.round(weather.main.temp)}°F</div>
-              <div className="weather">{weather.weather[0].description}</div>
-            </div>
-          </div>
-        ) : (
-          ""
-        )}
-      </div>
+              ) : (
+                ""
+              )}{" "}
+            </Typography>
+            <Typography variant="body2" component="p">
+              {weather.name}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
     </Grid>
   );
 }
