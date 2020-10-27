@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+
+//Search Box
 import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import Button from "@material-ui/core/Button";
 
 //card
 import Card from "@material-ui/core/Card";
@@ -68,6 +72,17 @@ const useStyles = makeStyles((theme) => ({
   weathercontent: {
     paddingTop: "50px",
   },
+  searchButton: {
+    fontFamily: "Trispace",
+    fontSize: 28,
+    backgroundColor: "#E0E0E0",
+  },
+  searchBlock: {
+    padding: theme.spacing(2),
+  },
+  searchButtonSpacing: {
+    padding: theme.spacing(4),
+  },
 }));
 
 function App() {
@@ -82,7 +97,10 @@ function App() {
         .then((result) => {
           setWeather(result);
           setQuery("");
+          console.log(result);
         });
+    } else {
+      console.log("err");
     }
   };
 
@@ -119,6 +137,14 @@ function App() {
     return `${day} ${month} ${date} ${year}`;
   };
 
+  const top100Films = [
+    { title: "Columbia, MO, US" },
+    { title: "New York, NY, US" },
+    { title: "Chicago, IL, US" },
+    { title: "St. Louis, MO, US" },
+    { title: "Kansas City, MO, US" },
+  ];
+
   return (
     <Grid>
       <Grid container justify="center" direction="row">
@@ -128,17 +154,44 @@ function App() {
         <Grid item xs={12}>
           <h1 className={classes.bigtitle2}>CurrentWeather.com</h1>
         </Grid>
-        <Grid item>
-          <TextField
-            type="text"
-            id="outlined-basic"
-            label="Search"
-            variant="outlined"
-            className={classes.searchbar}
-            onChange={(e) => setQuery(e.target.value)}
-            value={query}
-            onKeyPress={search}
-          />
+        <Grid container justify="center" className={classes.searchBlock}>
+          <Grid item>
+            <Autocomplete
+              freeSolo
+              id="outlined-basic"
+              className={classes.searchbar}
+              onChange={(e) => setQuery(e.target.value)}
+              value={query}
+              onKeyPress={search}
+              options={top100Films.map((option) => option.title)}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Enter a Location"
+                />
+              )}
+            />
+          </Grid>
+          <Grid
+            container
+            justify="center"
+            className={classes.searchButtonSpacing}
+          >
+            <Grid item>
+              <Button
+                className={classes.searchButton}
+                value={query}
+                onClick={(e) => {
+                  setQuery(e.target.value);
+                  console.log(query);
+                  //search();
+                }}
+              >
+                Search
+              </Button>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
       <Grid container justify="center" className={classes.weathercontent}>
@@ -155,11 +208,12 @@ function App() {
               <Typography variant="h5" component="h2">
                 <div>
                   <div>{Math.round(weather.main.temp)}°F</div>
-                  {weather.weather[0].description}
+                  {weather.weather[0].main}
                 </div>
               </Typography>
               <Typography variant="body2" component="p">
-                {weather.name}
+                {weather.name + ", "}
+                {weather.sys.country}
               </Typography>
             </CardContent>
           </Card>
