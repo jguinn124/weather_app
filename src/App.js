@@ -121,7 +121,7 @@ function App() {
 
   return (
     <Grid>
-      <Grid container justify="center">
+      <Grid container justify="center" direction="row">
         <Grid item xs={12}>
           <h1 className={classes.bigtitle1}>FindMy</h1>
         </Grid>
@@ -142,36 +142,30 @@ function App() {
         </Grid>
       </Grid>
       <Grid container justify="center" className={classes.weathercontent}>
-        <Card className={classes.root}>
-          <CardContent>
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
-              {DateBuilder(new Date())}
-            </Typography>
-            <Typography variant="h5" component="h2">
-              {typeof weather.main != "undefined" ? (
+        {typeof weather.main != "undefined" ? (
+          <Card className={classes.root}>
+            <CardContent>
+              <Typography
+                className={classes.title}
+                color="textSecondary"
+                gutterBottom
+              >
+                {DateBuilder(new Date())}
+              </Typography>
+              <Typography variant="h5" component="h2">
                 <div>
-                  <div className="weather-box">
-                    <div className="temp">
-                      {Math.round(weather.main.temp)}°F
-                    </div>
-                    <div className="weather">
-                      {weather.weather[0].description}
-                    </div>
-                  </div>
+                  <div>{Math.round(weather.main.temp)}°F</div>
+                  {weather.weather[0].description}
                 </div>
-              ) : (
-                ""
-              )}{" "}
-            </Typography>
-            <Typography variant="body2" component="p">
-              {weather.name}
-            </Typography>
-          </CardContent>
-        </Card>
+              </Typography>
+              <Typography variant="body2" component="p">
+                {weather.name}
+              </Typography>
+            </CardContent>
+          </Card>
+        ) : (
+          ""
+        )}{" "}
       </Grid>
     </Grid>
   );
