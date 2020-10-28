@@ -178,19 +178,22 @@ function App() {
             justify="center"
             className={classes.searchButtonSpacing}
           >
+            {/* 
             <Grid item>
               <Button
                 className={classes.searchButton}
                 value={query}
                 onClick={(e) => {
                   setQuery(e.target.value);
-                  console.log(query);
+                  console.log("yes");
+                  console.log(e.target.value);
                   //search();
                 }}
               >
                 Search
               </Button>
             </Grid>
+            */}
           </Grid>
         </Grid>
       </Grid>
