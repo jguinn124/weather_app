@@ -99,8 +99,6 @@ function App() {
           setQuery("");
           console.log(result);
         });
-    } else {
-      console.log("err");
     }
   };
 
