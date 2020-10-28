@@ -138,11 +138,25 @@ function App() {
   };
 
   const top100Films = [
-    { title: "Columbia, MO, US" },
     { title: "New York, NY, US" },
     { title: "Chicago, IL, US" },
     { title: "St. Louis, MO, US" },
+    { title: "Columbia, MO, US" },
     { title: "Kansas City, MO, US" },
+    { title: "Los Angeles, CA, US" },
+    { title: "Houston, TX, US" },
+    { title: "Phoenix, AZ, US" },
+    { title: "Philadelphia, PA, US" },
+    { title: "San Antonio, TX US" },
+    { title: "San Diego, CA US" },
+    { title: "San Jose, CA  US" },
+    { title: "Austin, TX  US" },
+    { title: "Fort Worth, TX  US" },
+    { title: "Jacksonville, FL  US" },
+    { title: "Columbus, OH  US" },
+    { title: "Charlotte, NC, US" },
+    { title: "San Francisco, CA  US" },
+    { title: "Indianapolis, IN  US" },
   ];
 
   return (
