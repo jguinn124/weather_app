@@ -71,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
   weathercontent: {
     paddingTop: "50px",
+    padding: "60px",
   },
   searchButton: {
     fontFamily: "Trispace",
@@ -185,12 +186,13 @@ function App() {
               )}
             />
           </Grid>
+          {/* 
           <Grid
             container
             justify="center"
             className={classes.searchButtonSpacing}
           >
-            {/* 
+            {/*  
             <Grid item>
               <Button
                 className={classes.searchButton}
@@ -205,37 +207,113 @@ function App() {
                 Search
               </Button>
             </Grid>
-            */}
+            
           </Grid>
+          */}
         </Grid>
       </Grid>
-      <Grid container justify="center" className={classes.weathercontent}>
-        {typeof weather.main != "undefined" ? (
-          <Card className={classes.root}>
-            <CardContent>
-              <Typography
-                className={classes.title}
-                color="textSecondary"
-                gutterBottom
-              >
-                {DateBuilder(new Date())}
-              </Typography>
-              <Typography variant="h5" component="h2">
-                <div>
-                  <div>{Math.round(weather.main.temp)}°F</div>
-                  {weather.weather[0].main}
-                </div>
-              </Typography>
-              <Typography variant="body2" component="p">
-                {weather.name + ", "}
-                {weather.sys.country}
-              </Typography>
-            </CardContent>
-          </Card>
-        ) : (
-          ""
-        )}{" "}
-      </Grid>
+      {typeof weather.main != "undefined" ? (
+        <Grid
+          container
+          justify="center"
+          className={classes.weathercontent}
+          direction="row"
+        >
+          <Grid
+            container
+            justify="center"
+            className={classes.weathercontent}
+            spacing={6}
+          >
+            {/* Current Weather Card */}
+            <Grid item md={4}>
+              <Card className={classes.root}>
+                <CardContent>
+                  <Typography
+                    className={classes.title}
+                    color="textSecondary"
+                    gutterBottom
+                  >
+                    {DateBuilder(new Date())}
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                    <div>
+                      <div>{Math.round(weather.main.temp)}°F</div>
+                      {weather.weather[0].main}
+                    </div>
+                  </Typography>
+                  <Typography variant="body2" component="p">
+                    {weather.name + ", "}
+                    {weather.sys.country}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            {/* Current Temp Card */}
+            <Grid item md={4}>
+              <Card className={classes.root}>
+                <CardContent>
+                  <Typography
+                    className={classes.title}
+                    color="textSecondary"
+                    gutterBottom
+                  >
+                    Temperature
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                    <div>
+                      <div>{Math.round(weather.main.temp)}°F</div>
+                      <div>
+                        Feels Like: {Math.round(weather.main.feels_like)}°F
+                      </div>
+                      <div>
+                        Today's Low: {Math.round(weather.main.temp_min)}°F
+                      </div>
+                      <div>
+                        Today's High: {Math.round(weather.main.temp_max)}°F
+                      </div>
+                    </div>
+                  </Typography>
+                  <Typography variant="body2" component="p">
+                    {weather.name + ", "}
+                    {weather.sys.country}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            {/* Current Wind Card */}
+            <Grid item md={4}>
+              <Card className={classes.root}>
+                <CardContent>
+                  <Typography
+                    className={classes.title}
+                    color="textSecondary"
+                    gutterBottom
+                  >
+                    Wind in Your Area
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                    <div>
+                      <div>Wind Direction: {Math.round(weather.wind.deg)}°</div>
+                      <div>
+                        Wind Speed: {Math.round(weather.wind.speed)} mph
+                      </div>
+                    </div>
+                  </Typography>
+                  <Typography variant="body2" component="p">
+                    {weather.name + ", "}
+                    {weather.sys.country}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        </Grid>
+      ) : (
+        ""
+      )}{" "}
     </Grid>
   );
 }
